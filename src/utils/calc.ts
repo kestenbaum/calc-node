@@ -1,22 +1,20 @@
-import { toUSD } from "./format"
-
-const calcTip = (check: number, percentage:number): number => {
- return check + (check * percentage / 100) 
+const calcPercentage = (check: number, percentage:number): number => {
+    return check + (check * percentage / 100) 
 }
 
-const calcAmount = (total:number, check:number): number => {
+const calcPercentageAmount = (total:number, check:number): number => {
     return total - check
 }
 
-const calcPerPerson = (person: number, total:number): string | number => {
+const calcPerPerson = (person: number, total:number): number => {
     if (person === 0) return 1;
 
-    return toUSD(total / person)
+    return total / person
 };
 
 
 export {
-    calcTip,
-    calcAmount, 
+    calcPercentage,
+    calcPercentageAmount, 
     calcPerPerson
 }

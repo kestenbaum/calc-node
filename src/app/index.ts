@@ -1,14 +1,15 @@
 import * as readline from "readline";
 import { 
   questions, 
-  calcTip, 
-  calcAmount,
+  calcPercentageAmount,
+  calcPerPerson,
   checkedAnswer,
   checkedPerson,
   checkedAmount,
   checkedPercentage,
   printResult,
 } from "../utils";
+import { calcPercentage } from "../utils/calc";
 
 
 const rl = readline.createInterface({
@@ -21,24 +22,22 @@ const question = (q: string): Promise<string> => {
 }
 
 (async () => {
-    const getCheckedAmount = await checkedAmount(question, questions.check);
-    const getPercentage = await checkedPercentage(question, questions.percentage);
-    const getAnswer = await checkedAnswer(question, questions.split);  
-    const getCountPerson = 
-      getAnswer === "yes" 
-        ? await checkedPerson(question, questions.people)
-        : 1;
-
-    const total = calcTip(getCheckedAmount, getPercentage);
-    const tipAmount = calcAmount(total, getCheckedAmount);
+  const getCheckedAmount = await checkedAmount(question, questions.check);            
+  const getPercentage = await checkedPercentage(question, questions.percentage); 
+  const answer = await checkedAnswer(question, questions.split);              
+  const people = answer === "yes" ? await checkedPerson(question, questions.people) : 1;
+  const total = calcPercentage(getCheckedAmount, getPercentage); 
+  const tipAmount = calcPercentageAmount(total, getCheckedAmount); 
+  const perPerson = calcPerPerson(people, total);
 
     printResult({
       getCheckedAmount,
       getPercentage,
       total,
       tipAmount,
-      divideAmong: getAnswer,
-      people: getCountPerson
+      divideAmong: answer,
+      people,
+      perPerson
     })
 
     rl.close()

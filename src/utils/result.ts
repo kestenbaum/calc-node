@@ -1,4 +1,3 @@
-import { calcPerPerson } from "./calc";
 import { toUSD } from "./format";
 
 interface IResult {
@@ -8,13 +7,12 @@ interface IResult {
   tipAmount: number;
   divideAmong: string;
   people: number;
+  perPerson: number
 }
 
 export const printResult = (props: IResult): void => {
     const header: string = "--- Tip Calculation Summary ---";
     const footer: string = "-------------------------------"
-    const perPerson = calcPerPerson(props.total, props.people)
-
     return console.log(
         `
         ${header}
@@ -24,7 +22,7 @@ export const printResult = (props: IResult): void => {
         Total Bill: ${toUSD(props.total)}
         Divide among people: ${props.divideAmong}
         Split between how many people: ${props.people}
-        Each person pays: ${perPerson}
+        Each person pays: ${toUSD(props.perPerson)}
         ${footer}
         `
     )
