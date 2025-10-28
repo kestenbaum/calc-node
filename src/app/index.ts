@@ -1,5 +1,11 @@
 import * as readline from "readline";
-import { toUSD, questions } from "../utils";
+import { 
+  toUSD, 
+  questions, 
+  calcTip, 
+  calcAmount,
+  calcPerPerson
+} from "../utils";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -14,21 +20,16 @@ const question = (q: string): Promise<string> => {
 (async () => {
     const check = parseFloat(await question(questions.check));
     const tipPercentage = parseFloat(await question(questions.tip));
-    const total = check + (check * tipPercentage / 100);
-    const tipAmount = total - check;
-
+    const total = calcTip(check, tipPercentage);
+    const tipAmount = calcAmount(total, check);
+    let error:string = "You must choose yes or no."
+    let answer: string = "";
     let person = 1;
     let divideAmongPeople = null;
 
-    const everyoneMustPay = (person: number):string | number => {
-       if (person === 0) return 1;
-
-       return toUSD(total / person)
-    };
-
-    let answer = "";
     while (answer !== "yes" && answer !== "no") {
         answer = (await question(questions.split)).trim().toLowerCase()
+        console.log(error)
     }
 
     if (answer === "yes") {
@@ -46,7 +47,7 @@ const question = (q: string): Promise<string> => {
     Total Bill: ${toUSD(total)}
     Divide among people: ${divideAmongPeople}
     Split between how many people: ${person}
-    Each person pays: ${everyoneMustPay(person)}
+    Each person pays: ${calcPerPerson(total, person)}
     -----------------------------
     `)
 
