@@ -2,7 +2,7 @@ import { calcPerPerson } from "./calc";
 import { toUSD } from "./format";
 
 interface IResult {
-  check: number;
+  getCheckedAmount: number;
   tipPercentage: number;
   total: number;
   tipAmount: number;
@@ -18,7 +18,7 @@ export const printResult = (props: IResult): void => {
     return console.log(
         `
         ${header}
-        Check Amount:${toUSD(props.check)}
+        Check Amount:${toUSD(props.getCheckedAmount)}
         Tip Percentage: ${props.tipPercentage}%
         Tip Amount: ${toUSD(props.tipAmount)}
         Total Bill: ${toUSD(props.total)}
