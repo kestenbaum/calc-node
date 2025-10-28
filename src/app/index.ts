@@ -1,12 +1,11 @@
 import * as readline from "readline";
 import { 
-  toUSD, 
   questions, 
   calcTip, 
   calcAmount,
-  calcPerPerson,
   checkedAnswer,
-  checkedPerson
+  checkedPerson,
+  printResult
 } from "../utils";
 
 
@@ -31,17 +30,14 @@ const question = (q: string): Promise<string> => {
         ? await checkedPerson(question, questions.people)
         : 1;
 
-    console.log(
-    `--- Tip Calculation Summary ---
-    Check Amount:${toUSD(check)}
-    Tip Percentage: ${tipPercentage}%
-    Tip Amount: ${toUSD(tipAmount)}
-    Total Bill: ${toUSD(total)}
-    Divide among people: ${getAnswer}
-    Split between how many people: ${getCountPerson}
-    Each person pays: ${calcPerPerson(getCountPerson, total)}
-    -----------------------------
-    `)
+    printResult({
+      check,
+      tipPercentage,
+      total,
+      tipAmount,
+      divideAmong: getAnswer,
+      people: getCountPerson
+    })
 
     rl.close()
 })()
