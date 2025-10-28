@@ -1,5 +1,29 @@
 import { handleErrors } from "./error";
 
+const checkedAmount = async (
+  ask: (q: string) => Promise<string>,
+  question: string
+): Promise<number> => {
+  let value: number = NaN;
+
+  while (true) {
+    try {
+      const input = await ask(question);
+      value = parseFloat(input);
+
+      if (Number.isNaN(value) || value <= 0) {
+        console.log("Enter a valid positive number.");
+      } else {
+        break;
+      }
+    } catch (err: unknown) {
+      handleErrors(err, "Error reading input");
+    }
+  }
+
+  return value;
+};
+
 const checkedAnswer = async (
   ask: (q: string) => Promise<string>,
   question: string
@@ -46,5 +70,6 @@ const checkedPerson = async (
 
 export {
     checkedAnswer,
-    checkedPerson
+    checkedPerson,
+    checkedAmount
 }
