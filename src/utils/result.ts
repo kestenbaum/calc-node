@@ -3,7 +3,7 @@ import { toUSD } from "./format";
 
 interface IResult {
   getCheckedAmount: number;
-  tipPercentage: number;
+  getPercentage: number;
   total: number;
   tipAmount: number;
   divideAmong: string;
@@ -19,7 +19,7 @@ export const printResult = (props: IResult): void => {
         `
         ${header}
         Check Amount:${toUSD(props.getCheckedAmount)}
-        Tip Percentage: ${props.tipPercentage}%
+        Tip Percentage: ${props.getPercentage}%
         Tip Amount: ${toUSD(props.tipAmount)}
         Total Bill: ${toUSD(props.total)}
         Divide among people: ${props.divideAmong}
