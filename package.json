@@ -1,0 +1,27 @@
+{
+  "name": "calc-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node app/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kestenbaum/calc-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kestenbaum/calc-node/issues"
+  },
+  "homepage": "https://github.com/kestenbaum/calc-node#readme",
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
