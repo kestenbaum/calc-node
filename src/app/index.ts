@@ -6,7 +6,8 @@ import {
   checkedAnswer,
   checkedPerson,
   checkedAmount,
-  printResult
+  checkedPercentage,
+  printResult,
 } from "../utils";
 
 
@@ -21,20 +22,19 @@ const question = (q: string): Promise<string> => {
 
 (async () => {
     const getCheckedAmount = await checkedAmount(question, questions.check);
-    const getAnswer = await checkedAnswer(question, questions.split);
+    const getPercentage = await checkedPercentage(question, questions.percentage);
+    const getAnswer = await checkedAnswer(question, questions.split);  
     const getCountPerson = 
       getAnswer === "yes" 
         ? await checkedPerson(question, questions.people)
         : 1;
 
-        
-    const tipPercentage = parseFloat(await question(questions.tip));
-    const total = calcTip(getCheckedAmount, tipPercentage);
+    const total = calcTip(getCheckedAmount, getPercentage);
     const tipAmount = calcAmount(total, getCheckedAmount);
 
     printResult({
       getCheckedAmount,
-      tipPercentage,
+      getPercentage,
       total,
       tipAmount,
       divideAmong: getAnswer,
@@ -42,4 +42,4 @@ const question = (q: string): Promise<string> => {
     })
 
     rl.close()
-})()
+})();
