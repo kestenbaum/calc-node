@@ -8,9 +8,8 @@ import {
   checkedAmount,
   checkedPercentage,
   printResult,
+  calcPercentage
 } from "../utils";
-import { calcPercentage } from "../utils/calc";
-
 
 const rl = readline.createInterface({
   input: process.stdin,
