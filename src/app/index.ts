@@ -5,9 +5,9 @@ import {
   calcAmount,
   checkedAnswer,
   checkedPerson,
+  checkedAmount,
   printResult
 } from "../utils";
-import { checkedAmount } from "../utils/checked";
 
 
 const rl = readline.createInterface({
