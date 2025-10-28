@@ -7,6 +7,7 @@ import {
   checkedPerson,
   printResult
 } from "../utils";
+import { checkedAmount } from "../utils/checked";
 
 
 const rl = readline.createInterface({
@@ -19,19 +20,20 @@ const question = (q: string): Promise<string> => {
 }
 
 (async () => {
-    const check = parseFloat(await question(questions.check));
-    const tipPercentage = parseFloat(await question(questions.tip));
-    const total = calcTip(check, tipPercentage);
-    const tipAmount = calcAmount(total, check);
-
+    const getCheckedAmount = await checkedAmount(question, questions.check);
     const getAnswer = await checkedAnswer(question, questions.split);
     const getCountPerson = 
       getAnswer === "yes" 
         ? await checkedPerson(question, questions.people)
         : 1;
 
+        
+    const tipPercentage = parseFloat(await question(questions.tip));
+    const total = calcTip(getCheckedAmount, tipPercentage);
+    const tipAmount = calcAmount(total, getCheckedAmount);
+
     printResult({
-      check,
+      getCheckedAmount,
       tipPercentage,
       total,
       tipAmount,
