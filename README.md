@@ -46,6 +46,7 @@ src/
  │   ├─ questions.ts      # Textfragen
  |   ├─ checked.ts        # Checkedfragen
  |   |─ index.ts          # Export helpers
+ |   |─ error.ts          # Beschreibt den Fehler
 ```
 
  
